@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leak Result - CyberSnoop</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>CyberSnoop</h1>
+    <p>Leak Results for <span style="color: #00bfff;">{{ query }}</span></p>
+
+    {% if leaks %}
+      <div class="results-box">
+        {% for leak in leaks %}
+          <div class="leak-entry">
+            <p><strong>Platform:</strong> {{ leak.platform }}</p>
+            <p><strong>Details:</strong> {{ leak.details }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="color: lightgreen;">✅ No leaks found. Your data seems safe!</p>
+    {% endif %}
+
+    <h2>Tips to Secure Your Account</h2>
+    <ul class="tips">
+      <li>🔐 Change your password immediately.</li>
+      <li>🛡️ Enable two-factor authentication (2FA).</li>
+      <li>🔑 Use unique passwords for every site.</li>
+      <li>📦 Use a trusted password manager.</li>
+    </ul>
+
+    <a href="/" class="back-link">← Back to Home</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+type,value,platform,details
+email,johndoe@gmail.com,Facebook,Exposed in 2019 breach
+phone,9876543210,Twitter,Leaked in SMS 2FA incident
+email,alice@gmail.com,LinkedIn,Password and name exposed
+phone,9123456789,WhatsApp,Compromised via third-party app
+email,belly@gmail.com,Dropbox,Found in leaked credentials dump

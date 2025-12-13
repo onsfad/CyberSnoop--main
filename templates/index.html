@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CyberSnoop - Data Leak Checker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>CyberSnoop</h1>
+    <p>Personal Data Leak Checker</p>
+    <form action="/check-leak" method="post">
+      <input type="text" name="query" placeholder="Enter your email or phone number" required>
+      <button type="submit">Check for Leak</button>
+    </form>
+  </div>
+</body>
+</html>
