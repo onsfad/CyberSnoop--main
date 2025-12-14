@@ -66,3 +66,6 @@ jobs:
     # 8️⃣ Push Docker image
     - name: Push Docker image
       run: docker push $DOCKER_IMAGE_NAME
+    # Push Docker image sur Docker Hub
+    - name: Push Docker image
+      run: docker push $DOCKER_IMAGE_NAME
