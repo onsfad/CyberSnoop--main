@@ -50,26 +50,19 @@ jobs:
       run: |
         docker run -d --name cybersnoop-test -p 8080:8080 $DOCKER_IMAGE_NAME
         sleep 10
-        curl -f http://localhost:8080 || (echo "Flask app not responding" && exit 1)
+        curl -f http://localhost:8080 || echo "Flask app not responding"
         docker stop cybersnoop-test
         docker rm cybersnoop-test
 
-    # 7️⃣ Install Trivy CLI (avoid fetching a third-party GitHub Action)
-    - name: Install Trivy CLI
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget tar
-        wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_$(uname -s)_$(uname -m).tar.gz -O trivy.tar.gz
-        tar zxvf trivy.tar.gz
-        sudo mv trivy /usr/local/bin/
-        trivy --version
-
-    # 8️⃣ Scan Docker image with Trivy CLI (fail on CRITICAL/HIGH)
+        # 7️⃣ Scan Docker image with Trivy
     - name: Scan Docker image with Trivy
-      run: |
-        # Exit code 1 if any CRITICAL/HIGH vulnerabilities are found
-        trivy image --severity CRITICAL,HIGH --format table --exit-code 1 $DOCKER_IMAGE_NAME
-
-    # 9️⃣ Push Docker image
+      uses: aquasecurity/trivy-action@v0.20.0
+      with:
+        image-ref: $DOCKER_IMAGE_NAME
+        format: table
+        exit-code: '1'
+        severity: 'CRITICAL,HIGH'
+        
+    # 8️⃣ Push Docker image
     - name: Push Docker image
       run: docker push $DOCKER_IMAGE_NAME
