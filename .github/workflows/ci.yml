@@ -54,14 +54,14 @@ jobs:
         docker stop cybersnoop-test
         docker rm cybersnoop-test
 
+    # 7️⃣ Scan Docker image with Trivy
     - name: Scan Docker image with Trivy
       uses: aquasecurity/trivy-action@v0.33.1
       with:
-      image-ref: $DOCKER_IMAGE_NAME
-      format: table
-      exit-code: '1'
-      severity: 'CRITICAL,HIGH'
-
+        image-ref: ${{ env.DOCKER_IMAGE_NAME }}
+        format: table
+        exit-code: '1'
+        severity: 'CRITICAL,HIGH'
 
     # 8️⃣ Push Docker image
     - name: Push Docker image
